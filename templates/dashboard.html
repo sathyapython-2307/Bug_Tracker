@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><title>Bug Tracker</title><link rel="stylesheet" href="/static/css/style.css"></head>
+<body><div class="box">
+<h2>Report Bug</h2>
+<form method="POST">
+<input name="title" placeholder="Title" required>
+<textarea name="description" placeholder="Description" required></textarea>
+<select name="priority">
+<option value="Low">Low</option>
+<option value="Medium">Medium</option>
+<option value="High">High</option>
+</select>
+<select name="assigned">
+{% for user in users %}
+<option value="{{ user.username }}">{{ user.username }}</option>
+{% endfor %}
+</select>
+<button type="submit">Submit</button>
+</form>
+<h3>All Bugs</h3>
+{% for bug in bugs %}
+<div>
+<b>{{ bug.title }}</b> ({{ bug.priority }}) - {{ bug.status }}<br>
+Assigned to: {{ bug.assigned_to }}<br>
+<a href="/update/{{ bug.id }}">Mark as Fixed</a>
+</div><hr>
+{% endfor %}
+<a href="/logout">Logout</a>
+</div></body>
+</html>
